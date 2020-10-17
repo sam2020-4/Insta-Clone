@@ -54,7 +54,8 @@ class Image(models.Model):
     
     class Meta:
         ordering = ['-pub_date']
-        
+        verbose_name = 'My image'
+        verbose_name_plural = 'Images'
 
 #profile class 
 class Profile(models.Model):
