@@ -1,5 +1,9 @@
 from django.db import models
 from django.http  import HttpResponse
+import datetime as dt
+from tinymce.models import HTMLField
+from PIL import Image
+from django.contrib.auth.models import User
 
 # Create your models here.
 # image class 
@@ -11,7 +15,6 @@ class Image(models.Model):
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
-
         
     def save_image(self):
         self.save()
@@ -83,7 +86,6 @@ class Profile(models.Model):
         verbose_name_plural = 'Profiles'
         
 # comment class
-
 class Comment(models.Model):
     comment = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
