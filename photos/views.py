@@ -119,5 +119,21 @@ def user_profiles(request):
 
 
 
+@login_required(login_url='/accounts/login/')
+def like_image(request, id):
+    '''
+    Method that likes an image.
+    '''
+    image = get_object_or_404(Image, id=request.POST.get('image_id'))
+    
+    is_liked = False
+    if image.likes.filter(id = request.user.id).exists():
+        image.likes.remove(request.user)
+        is_liked = False
+    else:
+        image.likes.add(request.user)
+        is_liked = True
+    
+    return ("index")
 
 
