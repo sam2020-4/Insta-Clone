@@ -54,12 +54,13 @@ class Image(models.Model):
     
     class Meta:
         ordering = ['-pub_date']
+        
 
 #profile class 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    photo = models.ImageField(upload_to = 'profile_pics/', blank=True, default='profile_pics/default.jpg')
+    photo = models.ImageField(upload_to = '', blank=True, default='')
 
     def save_profile(self):
         self.save()
@@ -79,4 +80,30 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+        
+# comment class
+
+class Comment(models.Model):
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+    
+    @classmethod
+    def get_comment(cls):
+        comments = cls.objects.all()
+        return comments
+    
+    def __str__(self):
+        return self.comment
+    
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
         
