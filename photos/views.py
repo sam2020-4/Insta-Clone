@@ -41,4 +41,19 @@ def register(request):
     return render(request, 'registration/registrationform.html', {'form':form})
     
 
+@login_required(login_url='/accounts/login/')
+def search_images(request):
+    if 'keyword' in request.GET and request.GET["keyword"]:
+        search_term = request.GET.get("keyword")
+        searched_images = Image.search_images(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message":message,"images": searched_images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})
+
+
+
 
