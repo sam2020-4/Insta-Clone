@@ -2,7 +2,7 @@ from django.db import models
 from django.http  import HttpResponse
 
 # Create your models here.
-    
+# image class 
 class Image(models.Model):
     image_file = models.ImageField(upload_to = 'images/', default='')
     image_name = models.CharField(max_length=255)
@@ -54,5 +54,29 @@ class Image(models.Model):
     
     class Meta:
         ordering = ['-pub_date']
-        
 
+#profile class 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    photo = models.ImageField(upload_to = 'profile_pics/', blank=True, default='profile_pics/default.jpg')
+
+    def save_profile(self):
+        self.save()
+        
+        img = Image.open(self.photo.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.photo.path)
+
+    def delete_profile(self):
+        self.delete()
+    
+    def __str__(self):
+        return f'self.user, self.bio, self.photo'
+    
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+        
