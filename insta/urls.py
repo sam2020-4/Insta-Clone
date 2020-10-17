@@ -23,5 +23,8 @@ from photos.forms import RegisterForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'',include('photos.urls'))
-    
+    url(r'^accounts/register/$',RegistrationView.as_view(form_class=RegisterForm),name='registration_register',),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^logout/$', views.logout, {"next_page": '/'}), 
+    url(r'^tinymce/', include('tinymce.urls')),
 ]
