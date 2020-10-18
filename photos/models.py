@@ -6,14 +6,14 @@ from PIL import Image
 from django.contrib.auth.models import User
 
 # Create your models here.
-# image class 
+# # image class 
 class Image(models.Model):
     image_file = models.ImageField(upload_to = 'images/', default='')
     image_name = models.CharField(max_length=255)
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    # author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
+    author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
         
     def save_image(self):
@@ -30,8 +30,7 @@ class Image(models.Model):
     @classmethod
     def search_images(cls, search_term):
         images = cls.objects.filter(description__icontains=search_term)
-        return images
-    
+        return images    
     
     @classmethod
     def get_by_author(cls, Author):
