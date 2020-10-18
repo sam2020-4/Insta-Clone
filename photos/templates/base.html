@@ -26,9 +26,11 @@
 <body>
     {% include 'navbar.html' %}
     {% block content%}
-
+    <div class="jumbotron jumbotron-fluid bg-dark mb-1 pb-3 pt-3">        
+        <h2 class="display-5 text-center font-weight-bold text-white">Welcome to Instagram Photos Viewer!!!</h2>
+    </div>
     {% endblock %}
-</body>
+
 
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -36,6 +38,19 @@
     {% bootstrap_javascript %}
   
     {% endblock %}
+
+    <div class="mb-4 pb-4"></div>
+    <footer class="page-footer font-small primary-color-dark mt-4 pt-4">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-4">© 2020 Copyright.
+          <a href="https://github.com/sam2020-4">matata samuel</a>
+        </div>
+        <!-- Copyright -->
+      
+      </footer>
+
+</body>
 </html>
 
 
