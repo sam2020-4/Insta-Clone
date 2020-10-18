@@ -13,7 +13,7 @@ class Image(models.Model):
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
+    # author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
         
     def save_image(self):
@@ -64,7 +64,7 @@ class Image(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    photo = models.ImageField(upload_to = '', blank=True, default='')
+    photo = models.ImageField(upload_to = 'pics/', blank=True, default='')
 
     def save_profile(self):
         self.save()

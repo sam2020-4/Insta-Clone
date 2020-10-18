@@ -49,7 +49,7 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'registration/registrationform.html', {'form':form})
-    
+  
 
 @login_required(login_url='/accounts/login/')
 def search_images(request):
@@ -63,7 +63,6 @@ def search_images(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message": message})
-
 
 @login_required(login_url='/accounts/login/')
 def get_image(request, id):
@@ -89,10 +88,8 @@ def get_image(request, id):
     else:
         form = NewCommentForm(auto_id=False)
     
-    return render(request, "display.html", {"image":image, "form":form, "comments":comments})
+    return render(request, "images.html", {"image":image, "form":form, "comments":comments})
     
-
-
 @login_required(login_url='/accounts/login/')
 def new_image(request):
     current_user = request.user
@@ -106,8 +103,7 @@ def new_image(request):
 
     else:
         form = NewImageForm()
-    return render(request, 'postnew.html', {"form": form})
-
+    return render(request, 'new-image.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
 def user_profiles(request):
@@ -125,8 +121,7 @@ def user_profiles(request):
     else:
         form = ProfileUpdateForm()
     
-    return render(request, 'profile.html', {"form":form, "images":images})
-
+    return render(request, 'registration/profile.html', {"form":form, "images":images})
 
 
 @login_required(login_url='/accounts/login/')

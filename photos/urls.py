@@ -3,7 +3,6 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 from . import views
 
-
 urlpatterns = [
     url(r'^$', views.index, name= 'index'),
     url(r'^search/', views.search_images, name='search_results'),
@@ -11,7 +10,6 @@ urlpatterns = [
     url(r'^new/image$', views.new_image, name='new-image'),
     url(r'^accounts/profile/$', views.user_profiles, name='profile'),
     url(r'^like/(\d+)', views.like_image, name='like_image'),
-
 ]
 
 if settings.DEBUG:
