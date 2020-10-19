@@ -1,3 +1,0 @@
-Hello {{name}}
-
-Welcome to PicsGram. You will find the most exciting pictures from around the world on PicsGram.

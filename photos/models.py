@@ -1,20 +1,45 @@
 from django.db import models
-from django.http  import HttpResponse
 import datetime as dt
+from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from PIL import Image
-from django.contrib.auth.models import User
 
 # Create your models here.
-# # image class 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    photo = models.ImageField(upload_to = 'profile_pics/', blank=True, default='profile_pics/default.jpg')
+
+    def save_profile(self):
+        self.save()
+        
+        img = Image.open(self.photo.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.photo.path)
+
+    def delete_profile(self):
+        self.delete()
+    
+    def __str__(self):
+        return f'self.user, self.bio, self.photo'
+    
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+        
+    
 class Image(models.Model):
-    image_file = models.ImageField(upload_to = 'images/', default='')
+    image_file = models.ImageField(upload_to = 'images/', default='images/beagle.jpg')
     image_name = models.CharField(max_length=255)
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
+
         
     def save_image(self):
         self.save()
@@ -30,7 +55,8 @@ class Image(models.Model):
     @classmethod
     def search_images(cls, search_term):
         images = cls.objects.filter(description__icontains=search_term)
-        return images    
+        return images
+    
     
     @classmethod
     def get_by_author(cls, Author):
@@ -59,32 +85,7 @@ class Image(models.Model):
         verbose_name = 'My image'
         verbose_name_plural = 'Images'
 
-#profile class 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    photo = models.ImageField(upload_to = 'pics/', blank=True, default='')
 
-    def save_profile(self):
-        self.save()
-        
-        img = Image.open(self.photo.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.photo.path)
-
-    def delete_profile(self):
-        self.delete()
-    
-    def __str__(self):
-        return f'self.user, self.bio, self.photo'
-    
-    class Meta:
-        verbose_name = 'Profile'
-        verbose_name_plural = 'Profiles'
-        
-# comment class
 class Comment(models.Model):
     comment = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -108,4 +109,5 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+        
         
