@@ -7,6 +7,8 @@
 ### Author
 matata samuel
 
+### Project Home-page
+![Screenshot from 2020-10-20 13-58-38](https://user-images.githubusercontent.com/62925975/96581004-d1b25900-12e1-11eb-8d23-672357615997.png)
 
 ### Requirements
 ##### These are the requirements you need to get the project running locally on your machine:
