@@ -21,35 +21,24 @@
         <form class="form-inline" role="search" action="{% url 'search_results' %}">
           <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="keyword">
           <button type="submit" class="btn btn-outline-white btn-md my-2 btn-sm">Search</button>
-          </form>
+        </form>
 
         <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
             {% if user.is_authenticated %}
-            <ul>
-              <li class="dropdown list-unstyled">
-                <a href="#" class="dropdown-toggle btn btn-md btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                          <span class="caret"></span> </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                      <a href="{%url 'profile'%}">Profile</a>
-                    </li>
-                  <li>
-                    <a href="/accounts/password/change">Change Password</a>
-                  </li>
-                  <li>
-                    <a href="/logout">Logout</a>
-                  </li>
-                </ul>
-              </li>
+            <ul class="nav navbar-nav navbar-right text-white">
+              <li><a href="profile">Profile</a></li> &nbsp;
+              <li><a href="/accounts/password/change">Change Password</a></li>&nbsp;
+              <li><a href="/logout">Logout</a></li>
             </ul>
+         
             {% else %}
             <!-- RIGHT CONTENT -->
             <ul class="nav justify-content-end">
               <li class="nav-item">
-                <a class="nav-link font-weight-bold" href="/accounts/login">Login</a>
+                <a class="nav-link font-weight-bold" href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
               </li>
               <li>
-                <a class="nav-link font-weight-bold" href="/accounts/register">Register</a>
+                <a class="nav-link font-weight-bold" href="/accounts/register"><span class="glyphicon glyphicon-user"></span>Register</a>
               </li>         
             </ul>
 

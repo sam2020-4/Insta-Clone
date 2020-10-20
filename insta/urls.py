@@ -20,7 +20,6 @@ from django.contrib.auth import views
 from registration.backends.simple.views import RegistrationView
 from photos.forms import RegisterForm
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('photos.urls')),
@@ -28,6 +27,5 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}), 
     url(r'^tinymce/', include('tinymce.urls')),
-
-
 ]
+

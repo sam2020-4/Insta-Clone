@@ -1,17 +1,18 @@
-from django.shortcuts import render, redirect, render_to_response, HttpResponseRedirect
 from django.conf import settings
 from django.templatetags.static import static
+from django.shortcuts import render, redirect, render_to_response, HttpResponseRedirect
 from django.http import HttpResponse, Http404
 import datetime as dt
-from .forms import NewImageForm, NewCommentForm, ProfileUpdateForm, RegisterForm
-from django.contrib import messages
-from .email import send_welcome_email
 from .models import Image, Comment, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-
+from .forms import NewImageForm, NewCommentForm, ProfileUpdateForm, RegisterForm
+from django.contrib import messages
+from .email import send_welcome_email
 
 # Create your views here.
+
+
 def index(request):
     date = dt.date.today()
     images = Image.get_images()
@@ -48,8 +49,8 @@ def register(request):
         
     else:
         form = RegisterForm()
-    return render(request, 'registration/registrationform.html', {'form':form})
-  
+    return render(request, 'registration/registration_form.html', {'form':form})
+    
 
 @login_required(login_url='/accounts/login/')
 def search_images(request):
@@ -69,7 +70,7 @@ def get_image(request, id):
     comments = Comment.get_comment()
 
     try:
-        image = Image.objects.get(pk = id)
+        image = Image.objects.get(pk = id)        
         
     except ObjectDoesNotExist:
         raise Http404()
@@ -90,6 +91,7 @@ def get_image(request, id):
     
     return render(request, "images.html", {"image":image, "form":form, "comments":comments})
     
+
 @login_required(login_url='/accounts/login/')
 def new_image(request):
     current_user = request.user
@@ -104,6 +106,7 @@ def new_image(request):
     else:
         form = NewImageForm()
     return render(request, 'new-image.html', {"form": form})
+
 
 @login_required(login_url='/accounts/login/')
 def user_profiles(request):
@@ -140,5 +143,3 @@ def like_image(request, id):
         is_liked = True
     
     return ("index")
-
-
