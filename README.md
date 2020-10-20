@@ -7,8 +7,6 @@
 ### Author
 matata samuel
 
-### Screenshot
-<img src="https://github.com/sam2020-4/Screenshot from 2020-10-20 13-58-38.png" width="1000">
 
 ### Requirements
 ##### These are the requirements you need to get the project running locally on your machine:
@@ -68,7 +66,7 @@ matata samuel
 - Python
 - Django Framework
 - PostgreSQL
--HTML5
+- HTML5
 - Bootstrap
 
 ## Dependencies
