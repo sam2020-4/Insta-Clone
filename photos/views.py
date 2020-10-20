@@ -65,6 +65,7 @@ def search_images(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message": message})
 
+
 @login_required(login_url='/accounts/login/')
 def get_image(request, id):
     comments = Comment.get_comment()
