@@ -26,8 +26,8 @@
         <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
             {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right text-white">
-              <li><a href="profile">Profile</a></li> &nbsp;
-              <li><a href="/accounts/password/change">Change Password</a></li>&nbsp;
+              <li><a href="{%url 'profile'%}">Profile</a></li> &nbsp;&nbsp;
+              <li><a href="/accounts/password/change">Change Password</a></li>&nbsp;&nbsp;
               <li><a href="/logout">Logout</a></li>
             </ul>
          
